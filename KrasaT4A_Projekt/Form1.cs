@@ -288,7 +288,7 @@ namespace KrasaT4A_Projekt
                             Fight(Character[0], Character[i]);
                             i++;
                         }
-                        else if(i == 0)
+                        else if(i == difficulty)
                         {
                             VirtualConsole.Draw("\r\nCONGRATULATIONS!\r\nYou have defeated all the" +
                                 "guardians and escaped from the tower..." +
