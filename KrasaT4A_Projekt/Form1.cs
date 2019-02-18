@@ -47,7 +47,8 @@ namespace KrasaT4A_Projekt
 
         static int InitDB()
         {
-            Character.Add(new Characters(0, "Player", 4, 3, 3));
+            Random rand = new Random();
+            Character.Add(new Characters(0, "Player", rand.Next(1,4), rand.Next(1, 4), rand.Next(1, 4)));
             Character.Add(new Characters(1, "Rat", 2, 1, 1));
             Character.Add(new Characters(2, "Bear", 4, 3, 1));
             Character.Add(new Characters(3, "Bandit", 1, 1, 5));
@@ -331,9 +332,9 @@ namespace KrasaT4A_Projekt
                                     VirtualConsole.Draw("\r\nWIS upgraded!");
                                     break;
                                 case "agi":
-                                    Character[0].agi++;
+                                    Character[0].agi += 2;
                                     Character[0].upg--;
-                                    VirtualConsole.Draw("\r\nAGI upgraded!");
+                                    VirtualConsole.Draw("\r\nAGI upgraded by 2 points!");
                                     break;
                                 case "atk":
                                     Character[0].atkmod += 3;
@@ -350,6 +351,10 @@ namespace KrasaT4A_Projekt
                                     VirtualConsole.Draw("\r\nWrong stat chosen. [str][wis][agi][hp][atk]");
                                     break;
                             }                            
+                        }
+                        else
+                        {
+                            VirtualConsole.Draw("/r/nNot enough upgrade points!");
                         }
                         break;
                     default:

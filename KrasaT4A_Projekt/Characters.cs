@@ -32,7 +32,6 @@ namespace KrasaT4A_Projekt
         //levelup or some advancement shit
         public void AdvanceCharacter()
         {
-
             switch (choice.Next(1, 6))
             {
                 case 1:
@@ -70,6 +69,13 @@ namespace KrasaT4A_Projekt
                 case 2:
                     break;
             }
+
+            
+            if(wis - choice.Next(1, 100) > 0)
+            {
+                VirtualConsole.Draw("Upgrade point available!");
+            }
+
         }
 
         public Characters(int id, string name, int str, int wis, int agi)
