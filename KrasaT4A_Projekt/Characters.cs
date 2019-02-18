@@ -23,6 +23,9 @@ namespace KrasaT4A_Projekt
         public static float hpmult = 0.6f;
         public static float mpmult = 0.5f;
         public int atkmod = 0;
+        public int bnshp = 0;
+
+        public int upg = 0;
 
         readonly Random choice = new Random();
 
@@ -45,8 +48,8 @@ namespace KrasaT4A_Projekt
                     agi++; RefreshStats();
                     break;
                 case 4:
-                    VirtualConsole.Draw(name + " got smarter. +1 WIS");
-                    wis++; RefreshStats();
+                    VirtualConsole.Draw(name + " got smarter. +1 WIS +1 UPG");
+                    wis++; upg++; RefreshStats();
                     break;
                 case 5:
                     VirtualConsole.Draw(name + " has found a magic item, that increases power! +3 STR");
@@ -54,7 +57,17 @@ namespace KrasaT4A_Projekt
                     break;
                 case 6:
                     VirtualConsole.Draw(name + " has found a tome, that increases all stats! +1 to all");
-                    str++; agi++; wis++; atkmod++; RefreshStats();
+                    str++; agi++; wis++; atkmod++; bnshp++; RefreshStats();
+                    break;
+            }
+
+            switch (choice.Next(1, 2))
+            {
+                case 1:
+                    VirtualConsole.Draw("Upgrade point available!");
+                    upg++;
+                    break;
+                case 2:
                     break;
             }
         }
@@ -77,7 +90,7 @@ namespace KrasaT4A_Projekt
 
         public void RefreshStats()
         {
-            hp = Convert.ToInt32(str * hpmult);
+            hp = Convert.ToInt32(str * hpmult) + bnshp;
             mana = Convert.ToInt32(wis * mpmult);
 
             if (str > agi && str > wis)

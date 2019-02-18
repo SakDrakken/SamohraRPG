@@ -44,7 +44,6 @@
             textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,38 +98,38 @@
             this.customAdventureToolStripMenuItem.Name = "customAdventureToolStripMenuItem";
             this.customAdventureToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.customAdventureToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
+            this.customAdventureToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
             this.customAdventureToolStripMenuItem.Text = "&Custom Adventure";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShortcutKeyDisplayString = "Alt+F4";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
             this.toolStripMenuItem1.Text = "Exit";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -140,22 +139,22 @@
             this.characterStatsToolStripMenuItem});
             this.characterToolStripMenuItem.Name = "characterToolStripMenuItem";
             this.characterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
-            this.characterToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.characterToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.characterToolStripMenuItem.Text = "&Character";
-            // textBox1
+            // 
             // characterStatsToolStripMenuItem
             // 
             this.characterStatsToolStripMenuItem.Name = "characterStatsToolStripMenuItem";
             this.characterStatsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.characterStatsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.characterStatsToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.characterStatsToolStripMenuItem.Text = "&Character Stats";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(59, 20);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(65, 20);
             this.toolStripMenuItem2.Text = "&Actions";
             // 
             // textBox1
@@ -173,9 +172,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(759, 436);
+            this.button1.Location = new System.Drawing.Point(378, 439);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(248, 89);
+            this.button1.Size = new System.Drawing.Size(248, 89);            
             this.button1.TabIndex = 2;
             this.button1.Text = "Advance";
             this.button1.UseVisualStyleBackColor = true;
@@ -183,19 +182,10 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(0, 447);
+            this.textBox2.Location = new System.Drawing.Point(0, 413);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(753, 20);
+            this.textBox2.Size = new System.Drawing.Size(1007, 20);
             this.textBox2.TabIndex = 3;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(651, 473);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 26);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Enter";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -203,7 +193,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1008, 537);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(textBox1);
@@ -237,7 +226,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
         public static System.Windows.Forms.TextBox textBox1;
     }
 }

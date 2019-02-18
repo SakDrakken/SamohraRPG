@@ -18,6 +18,16 @@ namespace KrasaT4A_Projekt
 
         public static bool GameOverFlag = true;
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Enter))
+            {
+                Proceed(textBox2.Text);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         public static string GetStringClss(int clss)
         {
             if (clss == 1)
@@ -46,13 +56,13 @@ namespace KrasaT4A_Projekt
             return 0;
         }
 
-
         static void GameOver()
         {
             GameOverFlag = true;
             VirtualConsole.Clear();
             VirtualConsole.Draw("\r\n\r\n\r\n             YOU DIED\r\n\r\n\r\nRestart the game!");
             VirtualConsole.Draw("\r\nFinal stats:\r\n" + Character[0].name + " | " +
+                           Character[0].atkmod + " +ATK | " +
                            Character[0].str + " STR | " +
                            Character[0].wis + " WIS | " +
                            Character[0].agi + " AGI | " +
@@ -80,7 +90,7 @@ namespace KrasaT4A_Projekt
 
             if (afirst)
             {
-                int dmg = Convert.ToInt32(a.str * 0.3) + a.atkmod;
+                int dmg = Convert.ToInt32(a.str * 0.3) + a.atkmod - Convert.ToInt32(b.agi * 0.1f);
                 if (dmg >= 0)
                 {
                     b.hp -= dmg;
@@ -121,7 +131,7 @@ namespace KrasaT4A_Projekt
 
                 if (a.hp > 0)
                 {
-                    dmg = Convert.ToInt32(a.str * 0.3) + a.atkmod;
+                    dmg = Convert.ToInt32(a.str * 0.3) + a.atkmod - Convert.ToInt32(b.agi * 0.1f);
                     if (dmg >= 0)
                     {
                         b.hp -= dmg;
@@ -165,7 +175,6 @@ namespace KrasaT4A_Projekt
             = new string[14] { "Scoundrel", "Guard", "Kobold", "Mage", "Warrior", "Thief", "Cleric", "Paladin",
                                 "Bear", "Scorpion", "Imp", "Demon", "Spider", "Elemental"};
 
-
         static void ProcNPCs(int count)
         {
             int level = 6;
@@ -178,11 +187,13 @@ namespace KrasaT4A_Projekt
             }
         }
 
-
         private void Setup()
         {
             InitDB();
             ProcNPCs(difficulty);
+            VirtualConsole.Draw("Start a new game via the menu or press CTRL+SHIFT+G for a new adventure.");
+            textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
         }
 
         public Form1()
@@ -196,50 +207,211 @@ namespace KrasaT4A_Projekt
             Setup();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Help()
         {
-            if (textBox2.Text != String.Empty && Character[0].name == "Player")
-            {
-                Character[0].name = textBox2.Text;
-                textBox2.Text = String.Empty;
-            }
+            VirtualConsole.Draw("List of all commands:\n");
+            string[] commands = { "help", "fight", "name" };
 
+            foreach (string command in commands)
+            {
+                VirtualConsole.Draw(command + "\r\n");
+            }
+        }
+
+        private void Help(string command)
+        {
+            switch (command)
+            {
+                case "help":
+                    VirtualConsole.Draw("Shows all commands or command usage. Usage: 'help [command]'");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Proceed(string input)
+        {           
+            string[] arguments = input.ToLower().Split(' ');
+
+            if(arguments[0].ToLower() == "name")
+            {
+                arguments = input.Split(' ');
+            }
+            
+                        
             if (!GameOverFlag)
             {
-                if (i < Character.Count)
+                switch (arguments[0])
                 {
-                    VirtualConsole.Draw("\r\n\r\nLEVEL " + i);
-                    Character[0].RefreshStats();
-                    VirtualConsole.Draw(
-                           Character[0].name + "\r\n" +
+                    case "name":
+                        try
+                        {
+                            VirtualConsole.Draw("\r\nChanged name to " + arguments[1]);
+                            Character[0].name = arguments[1];
+                        }
+                        catch (Exception)
+                        {
+                            VirtualConsole.Draw("\r\nNo name entered. Usage: 'name [name]'");
+                        }                                            
+                        break;
+
+                    case "help":
+                        VirtualConsole.Draw("\r\nShowing help...");
+                        try
+                        {
+                            Help(arguments[1]);
+                        }
+                        catch (Exception)
+                        {
+                            Help();
+                        }                    
+                        break;
+
+                    case "fight":
+                        if (i < Character.Count)
+                        {
+                            VirtualConsole.Draw("\r\n\r\nFLOOR " + (difficulty + 1 - i));
+                            Character[0].RefreshStats();
+                            VirtualConsole.Draw(
+                                   Character[0].name + "\r\n" +
+                                   Character[0].atkmod + " +ATK | " +
+                                   Character[0].str + " STR | " +
+                                   Character[0].wis + " WIS | " +
+                                   Character[0].agi + " AGI | " +
+                                   Character[0].hp + " hp | " +
+                                   GetStringClss(Character[0].clss)
+                                   );
+
+                            Fight(Character[0], Character[i]);
+                            i++;
+                        }
+                        else if(i == 0)
+                        {
+                            VirtualConsole.Draw("\r\nCONGRATULATIONS!\r\nYou have defeated all the" +
+                                "guardians and escaped from the tower..." +
+                                "\r\n\r\nPress CTRL-SHIFT-G to start a new adventure...");
+                            GameOverFlag = true;
+                        }
+                        break;
+                    case "stats":
+                        VirtualConsole.Draw("\r\nStats:\r\n" + Character[0].name + " | " +
+                           Character[0].atkmod + " +ATK | " +
                            Character[0].str + " STR | " +
                            Character[0].wis + " WIS | " +
                            Character[0].agi + " AGI | " +
                            Character[0].hp + " hp | " +
-                           GetStringClss(Character[0].clss)
-                           );
+                           Character[0].upg + " UPG | " +
+                           GetStringClss(Character[0].clss));
+                        break;
+                    case "enemy":
+                        VirtualConsole.Draw("\r\nEnemy stats:\r\n" + Character[i].name + " | " +
+                           Character[i].str + " STR | " +
+                           Character[i].wis + " WIS | " +
+                           Character[i].agi + " AGI | " +
+                           Character[i].hp + " hp");
+                        break;
+                    case "do":
+                        WhatToDo();
+                        break;
+                    case "upgrade":
+                        if (Character[0].upg >= 1)
+                        {
+                            switch (arguments[1])
+                            {
+                                case "str":
+                                    Character[0].str++;
+                                    Character[0].upg--;
+                                    VirtualConsole.Draw("\r\nSTR upgraded!");
+                                    break;
+                                case "wis":
+                                    Character[0].wis++;
+                                    Character[0].upg--;
+                                    VirtualConsole.Draw("\r\nWIS upgraded!");
+                                    break;
+                                case "agi":
+                                    Character[0].agi++;
+                                    Character[0].upg--;
+                                    VirtualConsole.Draw("\r\nAGI upgraded!");
+                                    break;
+                                case "atk":
+                                    Character[0].atkmod += 3;
+                                    Character[0].upg--;
+                                    VirtualConsole.Draw("\r\nATK upgraded by 3 points!");
+                                    break;
+                                case "hp":
+                                    Character[0].bnshp += 2;
+                                    Character[0].upg--;
+                                    VirtualConsole.Draw("\r\nHP upgraded by 2 points!");
+                                    break;
+                                default:
+                                    VirtualConsole.Draw("\r\nWrong stat chosen. [str][wis][agi][hp][atk]");
+                                    break;
+                            }                            
+                        }
+                        break;
+                    default:
+                        try
+                        {
+                            if (arguments[0] == String.Empty)
+                            {
 
-                    Fight(Character[0], Character[i]);
-                    i++;
-                }
+                            }
+                            else
+                            {
+                                VirtualConsole.Draw("Unrecognized command.");
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                        }                                      
+                        break;
+                }                                       
             }
 
+            textBox2.Text = String.Empty;            
             textBox1.SelectionStart = textBox1.TextLength;
             textBox1.ScrollToCaret();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Proceed(textBox2.Text);
+        }
+
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void WhatToDo()
+        {
+            VirtualConsole.Draw("\r\n\r\nYou can [do]:" +
+                "\r\n[fight]> Proceeds to next floor guardian." +
+                "\r\n[stats]> Shows player stats. " +
+                "\r\n[enemy]> Shows enemy's stats. " +
+                "\r\n[upgrade [stat]]> Spends upgrade points to stats.");
+        }
+
+        private void StartNewGameText()
+        {
+            VirtualConsole.Draw("Welcome to the world of Samohra! You're a prisoner locked in a tower\r\n" +
+                "and your goal is to escape it. This game gets harder with every round. Every floor\r\n" +
+                "has it's guardian. You can proceed to the next floor, only if you defeat the floor's\r\n" +
+                "guardian.");
+            WhatToDo();
         }
 
         private void easyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             i = 1;
             VirtualConsole.Clear();
-            VirtualConsole.Draw("New game started!\r\nChoose your player name (or leave the line blank " +
-                "for default name):\r\n\r\n\r\nThen press 'Advance'!");
+            VirtualConsole.Draw("New game started!\r\nChoose your name with the 'name' command" +
+                " and the press Advance (or Enter)!\r\n");
             RefreshDB();
             GameOverFlag = false;
+            StartNewGameText();
         }
     }
 }
