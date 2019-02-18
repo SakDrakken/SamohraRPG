@@ -185,6 +185,7 @@ namespace KrasaT4A_Projekt
                 Character.Add(new Characters(i, name, rnd.Next(1, level), rnd.Next(1, level), rnd.Next(1, level)));
                 level += 3;
             }
+            Character[difficulty - 1] = new Characters(i, "Vlokesh, the Demon", 40, 40, 40);
         }
 
         private void Setup()
@@ -343,6 +344,7 @@ namespace KrasaT4A_Projekt
                                     Character[0].bnshp += 2;
                                     Character[0].upg--;
                                     VirtualConsole.Draw("\r\nHP upgraded by 2 points!");
+                                    Character[0].RefreshStats();
                                     break;
                                 default:
                                     VirtualConsole.Draw("\r\nWrong stat chosen. [str][wis][agi][hp][atk]");
