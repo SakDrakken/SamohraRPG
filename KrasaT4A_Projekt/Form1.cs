@@ -14,7 +14,7 @@ namespace KrasaT4A_Projekt
     {
         public static List<Characters> Character = new List<Characters>();
         public static int difficulty = 60; // default
-        static int i = 1;
+        public static int i = 1;
 
         public static bool GameOverFlag = true;
 
@@ -38,11 +38,11 @@ namespace KrasaT4A_Projekt
                 return "Warrior";
         }
 
-        static void RefreshDB()
+        public static void RefreshDB()
         {
             Character = new List<Characters>();
             InitDB();
-            ProcNPCs(difficulty);
+            ProcNPCs(difficulty - 6);
         }
 
         static int InitDB()
@@ -288,9 +288,9 @@ namespace KrasaT4A_Projekt
                             Fight(Character[0], Character[i]);
                             i++;
                         }
-                        else if(i == difficulty)
+                        else
                         {
-                            VirtualConsole.Draw("\r\nCONGRATULATIONS!\r\nYou have defeated all the" +
+                            VirtualConsole.Draw("\r\nCONGRATULATIONS!\r\nYou have defeated all the " +
                                 "guardians and escaped from the tower..." +
                                 "\r\n\r\nPress CTRL-SHIFT-G to start a new adventure...");
                             GameOverFlag = true;
@@ -401,7 +401,7 @@ namespace KrasaT4A_Projekt
                 "\r\n[upgrade [stat]]> Spends upgrade points to stats.");
         }
 
-        private void StartNewGameText()
+        public void StartNewGameText()
         {
             VirtualConsole.Draw("Welcome to the world of Samohra! You're a prisoner locked in a tower\r\n" +
                 "and your goal is to escape it. This game gets harder with every round. Every floor\r\n" +
@@ -412,6 +412,9 @@ namespace KrasaT4A_Projekt
 
         private void easyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //AdventureGenerator avventura = new AdventureGenerator();
+            //avventura.Generate();
+
             i = 1;
             VirtualConsole.Clear();
             VirtualConsole.Draw("New game started!\r\nChoose your name with the 'name' command" +
@@ -419,6 +422,23 @@ namespace KrasaT4A_Projekt
             RefreshDB();
             GameOverFlag = false;
             StartNewGameText();
+        }
+
+        private void characterStatsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VirtualConsole.Draw("\r\nStats:\r\n" + Character[0].name + " | " +
+                           Character[0].atkmod + " +ATK | " +
+                           Character[0].str + " STR | " +
+                           Character[0].wis + " WIS | " +
+                           Character[0].agi + " AGI | " +
+                           Character[0].hp + " hp | " +
+                           Character[0].upg + " UPG | " +
+                           GetStringClss(Character[0].clss));
+        }
+
+        private void customAdventureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

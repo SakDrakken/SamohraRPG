@@ -100,6 +100,7 @@
             | System.Windows.Forms.Keys.C)));
             this.customAdventureToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
             this.customAdventureToolStripMenuItem.Text = "&Custom Adventure";
+            this.customAdventureToolStripMenuItem.Click += new System.EventHandler(this.customAdventureToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -149,6 +150,7 @@
             | System.Windows.Forms.Keys.C)));
             this.characterStatsToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.characterStatsToolStripMenuItem.Text = "&Character Stats";
+            this.characterStatsToolStripMenuItem.Click += new System.EventHandler(this.characterStatsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -174,7 +176,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(378, 439);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(248, 89);            
+            this.button1.Size = new System.Drawing.Size(248, 89);
             this.button1.TabIndex = 2;
             this.button1.Text = "Advance";
             this.button1.UseVisualStyleBackColor = true;

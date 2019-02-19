@@ -63,7 +63,7 @@ namespace KrasaT4A_Projekt
             switch (choice.Next(1, 2))
             {
                 case 1:
-                    VirtualConsole.Draw("Upgrade point available!");
+                    VirtualConsole.Draw("Upgrade point available! UPG +1");
                     upg++;
                     break;
                 case 2:
@@ -73,7 +73,8 @@ namespace KrasaT4A_Projekt
             
             if(wis - choice.Next(1, 100) > 0)
             {
-                VirtualConsole.Draw("Upgrade point available!");
+                VirtualConsole.Draw("Upgrade point available! UPG +1");
+                upg++;
             }
 
         }
